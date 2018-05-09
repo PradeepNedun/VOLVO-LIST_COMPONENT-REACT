@@ -3,3 +3,13 @@ $primary: #006699;
 h2 {
 	color: $primary;
 }
+.filter-container {
+	display: flex;
+}
+.select-wrapper {
+	flex: 1;
+	margin: 10px auto;
+	flex: 1;
+	padding: 10px;
+	text-align: center;
+}
