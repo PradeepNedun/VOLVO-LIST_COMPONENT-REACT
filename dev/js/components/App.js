@@ -7,14 +7,14 @@ require('../../scss/style.scss');
 
 const App = () => (
     <div>
-        <h2>User List</h2>
+        {/* <h2>User List</h2>
         <UserList />
         <hr />
         <h2>User Details</h2>
-        <UserDetails />
-        <h2>Generic Filter</h2>
+        <UserDetails /> */}
+        <h2>Filter</h2>
         <GenericFilter/>
-        <h2>Generic List</h2>
+        <h2>List is coming soon</h2>
         <GenericList />
     </div>
 );

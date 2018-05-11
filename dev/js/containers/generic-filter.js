@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import SmoothCollapse from 'react-smooth-collapse';
 
 class GenericFilter extends Component {
-    
+	constructor() {
+		super();
+		this.state = {
+			shown: true,
+		};
+	}	
+	toggle() {
+		this.setState({
+			shown: !this.state.shown
+		});
+	}
     createOption(element) {
         return Object.keys(element).map(function(keys) {
             let temp = element[keys];
@@ -13,7 +24,9 @@ class GenericFilter extends Component {
     createSelect(self, element) {
         return Object.keys(element).map(function(key, index) {
             let temp = self.createOption(element[key]);
-            return <div className="select-wrapper"><h1>{Object.keys(element)[index]}</h1><select>{temp}</select></div>;
+            if(temp.length !== 0) {
+                return <div className="filter-select-wrapper"><select>{temp}</select></div>;
+            }
         });
     }
     renderList() {
@@ -24,9 +37,19 @@ class GenericFilter extends Component {
         });
     }
     render() {
+        var expanded = this.state.shown ? true : false;
         return (
-            <div className="filter-container">
-                {this.renderList()}
+            <div className={"filter-container " + (expanded ? 'show' : 'hidden')} >
+                <div className="filter-refine-wrapper" onClick={this.toggle.bind(this)}>
+                    <a className="btn-refine" data-toggle="collapse" aria-expanded="true">
+                        <span>Refine</span>
+                    </a>
+                </div>
+                <SmoothCollapse expanded={expanded}>
+                    <div className="filter-dropdowns-wrapper">
+                        {this.renderList()}
+                    </div>
+                </SmoothCollapse>
             </div>
         );
     }
