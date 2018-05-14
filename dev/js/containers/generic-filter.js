@@ -2,53 +2,45 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SmoothCollapse from 'react-smooth-collapse';
+import fontawesome from '@fortawesome/fontawesome';
+import ReactDOM from "react-dom";
+import GenericFilterSelect from './generic-filter-select';
 
 class GenericFilter extends Component {
 	constructor() {
-		super();
-		this.state = {
-			shown: true,
+        super();
+        this.state = {
+            showHideFilter: true
 		};
 	}	
-	toggle() {
-		this.setState({
-			shown: !this.state.shown
-		});
-	}
-    createOption(element) {
-        return Object.keys(element).map(function(keys) {
-            let temp = element[keys];
-            return <option value={keys}>{temp}</option>;
-        });
-    }
-    createSelect(self, element) {
-        return Object.keys(element).map(function(key, index) {
-            let temp = self.createOption(element[key]);
-            if(temp.length !== 0) {
-                return <div className="filter-select-wrapper"><select>{temp}</select></div>;
-            }
+    hideAllselect(e) {
+        e.preventDefault();
+        let select = e.target.parentNode.parentNode.children[0].querySelectorAll('select.shown');
+        select.forEach((item)=>{
+            item.className = 'hidden';
         });
     }
     renderList() {
         return this.props.filters.queryResult.map(element => {
-            let self = this;
-            let temp = this.createSelect(self, element);
-            return temp;
+            return <GenericFilterSelect selectArray={element} />;
+        });
+    }
+    toggleFilter() {
+        this.setState({
+            showHideFilter: !this.state.showHideFilter
         });
     }
     render() {
-        var expanded = this.state.shown ? true : false;
+        let expanded = this.state.showHideFilter;
         return (
-            <div className={"filter-container " + (expanded ? 'show' : 'hidden')} >
-                <div className="filter-refine-wrapper" onClick={this.toggle.bind(this)}>
+            <div className={"generic-filter " + (expanded? 'shown': 'hidden')}  onClick={this.hideAllselect.bind(this)}>
+                <div className="filter-refine-wrapper" onClick={this.toggleFilter.bind(this)}>
                     <a className="btn-refine" data-toggle="collapse" aria-expanded="true">
-                        <span>Refine</span>
+                        <span className="refine">Refine</span>
                     </a>
                 </div>
                 <SmoothCollapse expanded={expanded}>
-                    <div className="filter-dropdowns-wrapper">
-                        {this.renderList()}
-                    </div>
+                    {this.renderList()}
                 </SmoothCollapse>
             </div>
         );
