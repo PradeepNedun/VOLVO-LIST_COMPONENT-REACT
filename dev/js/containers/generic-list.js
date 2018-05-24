@@ -68,10 +68,10 @@ class GenericList extends Component {
                     </div>
                 );
              } else {
-                return;
+                return null;
             }
         } else {
-            return;
+            return null;
         }
     }
 

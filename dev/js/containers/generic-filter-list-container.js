@@ -99,13 +99,10 @@ class GenericFilterListContainer extends Component {
             <h2>Filter</h2>
             <GenericFilter id="1" requestFilterObject= {requestEventFilterObjectMock}/>
             <br/>
-            <br/>
             <GenericFilter id="2" requestFilterObject= {requestNewsFilterObjectMock}/>
-            <br/>
             <br/>
             <h2>List</h2>
             <GenericList id="1" requestListObject= {requestEventListObjectMock}/>
-            <br/>
             <br/>
             <GenericList id="2" requestListObject= {requestNewsListObjectMock}/>
             </div>

@@ -6,16 +6,11 @@ $primary: #006699;
 h2 {
 	color: $primary;
 }
-<<<<<<< HEAD
 .generic-filter {
 	max-height: 130px;
 	&.shown {
 		background: #ebebea;
 	}
-=======
-.filter-container {
-	background: #ebebea;
->>>>>>> 196b85a268517ba3be0a444c0bde42f6fb126655
 	&.hidden {
 		background: none;
 		min-height: 40px;
@@ -23,10 +18,7 @@ h2 {
 	.filter-refine-wrapper{
 		position: absolute;
 		left: 50%;
-<<<<<<< HEAD
 		z-index: 2;
-=======
->>>>>>> 196b85a268517ba3be0a444c0bde42f6fb126655
 		.btn-refine {
 			display: inline-block;
 			position: relative;
@@ -35,7 +27,6 @@ h2 {
 			background: #d8d7d5;
 			position: relative;
 			left: -50%;
-<<<<<<< HEAD
 			cursor: pointer;
 		}
 		.refine {
@@ -1023,32 +1014,3 @@ h2 {
       width: 75%;
     }
   }
-=======
-		}
-		span {
-			font-size: 0.875rem;
-			color: #4d4e53;
-			font-weight: 700;
-		}
-	}
-	.filter-dropdowns-wrapper {
-		display: flex;
-		.filter-select-wrapper {
-			flex: 1;
-			margin: 10px auto;
-			padding: 50px 50px 30px 50px;
-			select {
-				color: rgb(77, 78, 83);
-				font-size: 1rem;
-				line-height: 24px;
-				padding: 10px 40px 10px 18px;
-				border: none;
-				outline: 0;
-				width: 100%;
-			}
-		}
-	}
-}
-
-
->>>>>>> 196b85a268517ba3be0a444c0bde42f6fb126655
