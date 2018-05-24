@@ -34,7 +34,12 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.11.0",
+<<<<<<< HEAD
     "axios": "0.18.0"
+=======
+    "font-awesome": "^4.7.0",
+    "react-smooth-collapse": "^1.5.0"
+>>>>>>> 196b85a268517ba3be0a444c0bde42f6fb126655
   },
   "devDependencies": {
     "babel-plugin-react-transform": "^2.0.2",

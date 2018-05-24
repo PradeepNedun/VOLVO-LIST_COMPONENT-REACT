@@ -12,10 +12,10 @@ const App = (req) => (
         <hr />
         <h2>User Details</h2>
         <UserDetails /> */}
-        <GenericFilterListContainer/>
-        {/* <GenericFilter requestFilterObject= {req.requestFilterObject}/>
+        <h2>Filter</h2>
+        <GenericFilter/>
         <h2>List is coming soon</h2>
-        <GenericList /> */}
+        <GenericList />
     </div>
 );
 

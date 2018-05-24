@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+<<<<<<< HEAD
 import {itemsListFetchData} from '../actions/index';
 import EventList from './event-list';
 import NewsList from './news-list';
+=======
+>>>>>>> 196b85a268517ba3be0a444c0bde42f6fb126655
 
 class GenericList extends Component {
 	constructor(props) {
