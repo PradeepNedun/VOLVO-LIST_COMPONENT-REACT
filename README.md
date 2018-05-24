@@ -21,6 +21,11 @@ Start the development server (changes will now update live in browser)
 > npm run start
 ```
 
+createa a production file (changes will now update live in browser)
+```
+> npm run dev
+```
+
 To view your project, go to: [http://localhost:3000/](http://localhost:3000/)
 
 ## Links
