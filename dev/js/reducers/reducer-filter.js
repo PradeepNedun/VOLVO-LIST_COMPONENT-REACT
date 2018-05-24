@@ -2,38 +2,69 @@
  * The users reducer will always return an array of users no matter what
  * You need to return something, so if there are no users then just return an empty array
  * */
+/*
+ * All reducers get two parameters passed in, state and action that occurred
+ *       > state isn't entire apps state, only the part of state that this reducer is responsible for
+ * */
 
-export default function () {
-    return {
-	"query": ["category:all", "topic:all", "year:all", "TotalResultSize: 22"],
-	"queryResult": [{
-		"categories": {
-			"volvo:volvobuses/news/category-tags/category/news_newsletters": "Newsletters",
-			"volvo:volvobuses/news/category-tags/category/news_pressrelease_news": "Press release",
-			"volvo:volvobuses/news/category-tags/category/news_customer_magazine": "Customer magazine"
-		},
-		"topics": {
-			"volvo:volvobuses/news/topic-tags/topic/buses": "Buses",
-			"volvo:volvobuses/news/topic-tags/topic/coaches": "Coaches",
-			"volvo:volvobuses/news/topic-tags/topic/samplenew": "samplenew",
-			"volvo:volvobuses/news/topic-tags/topic/news_environment": "Environment",
-			"volvo:volvobuses/news/topic-tags/topic/customer-story": "Customer story",
-			"volvo:volvobuses/news/topic-tags/topic/news_safety": "Safety",
-			"volvo:volvobuses/news/topic-tags/topic/news_corporate": "Corporate",
-			"volvo:volvobuses/news/topic-tags/topic/quality": "Quality",
-			"volvo:volvobuses/news/topic-tags/topic/news_product": "Product",
-			"volvo:volvobuses/news/topic-tags/topic/city-mobility": "City mobility",
-			"volvo:volvobuses/news/topic-tags/topic/chassis": "Chassis",
-			"volvo:volvobuses/news/topic-tags/topic/electromobility": "Electromobility"
-		},
-		"years": {
-			"2018": "2018",
-			"2017": "2017",
-			"2016": "2016",
-			"2011": "2011",
-			"2010": "2010"
-		},
-		"segments": {}
-	}]
+// "state = null" is set so that we don't throw an error when app first boots up
+const initialState = {
+    filterResponse: {
+    },
+    itemsHasErrored: false,
+    itemsIsLoading: false,
+    toggleRefineBtn: {
+        toggleRefineBtn: true
+    },
+    HideFilterOnOutsideClick: false
+};
+
+export function itemsHasErrored(state = initialState.itemsHasErrored, action) {
+    switch (action.type) {
+        case 'ITEMS_HAS_ERRORED':
+            return action.hasErrored;
+
+        default:
+            return state;
+    }
 }
+
+export function itemsIsLoading(state = initialState.itemsIsLoading, action) {
+    switch (action.type) {
+        case 'ITEMS_IS_LOADING':
+            return action.isLoading;
+
+        default:
+            return state;
+    }
+}
+
+export function itemsFilter(state = initialState.filterResponse, action) {
+    switch (action.type) {
+        case 'ITEMS_FILTER_FETCH_DATA_SUCCESS':
+            return Object.assign({}, state, action.response);
+        default:
+            return state;
+    }
+}
+
+export function toggleRefineBtn(state = initialState.toggleRefineBtn, action) {
+    switch (action.type) {
+        case 'TOGGLE_REFINE_BTN':
+            return Object.assign({}, state, {
+                id: action.payload,
+                toggleRefineBtn: !state.toggleRefineBtn
+            });
+        default:
+            return state;
+    }
+}
+
+export function HideFilterOnOutsideClick(state = initialState, action) {
+    switch (action.type) {
+        case 'HIDE_SELECT':
+            return action.payload = true;
+        default:
+            return state;
+    }
 }
