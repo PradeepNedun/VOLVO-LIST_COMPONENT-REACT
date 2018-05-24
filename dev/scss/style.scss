@@ -1,5 +1,8 @@
 $primary: #006699;
-
+.container {
+	width: 1200px;
+	margin: auto;
+}
 h2 {
 	color: $primary;
 }
@@ -15,6 +18,7 @@ h2 {
 	.filter-refine-wrapper{
 		position: absolute;
 		left: 50%;
+		z-index: 2;
 		.btn-refine {
 			display: inline-block;
 			position: relative;
@@ -37,6 +41,9 @@ h2 {
 			}
 		}
 	}
+	.apply-btn {
+		display: none;
+	}
 }
 
 .generic-filter-select {
@@ -45,26 +52,47 @@ h2 {
 		flex: 1;
 		margin: 10px auto;
 		padding: 45px 50px 30px 50px;
+		cursor: default;
+		z-index: 1;
 		.option-select {
 			background-color: #fff;
 			font-size: 16px;
 			line-height: 24px;
 			font-family: Arial,sans-serif;
 			padding: 10px 40px 10px 18px;
+			color: rgb(77, 78, 83);
+			position: relative;
+			&::after {
+				display: inline-block;
+				position: absolute;
+				top: 24px;
+				right: 18px;
+				font-family: "fontawesome";
+				font-size: 24px;
+				line-height: 24px;
+				margin-top: -12px;
+				content: "\f107";
+				color: #1251b5;
+				pointer-events: none;
+			}
 		}
 		select {
 			color: rgb(77, 78, 83);
 			font-size: 1rem;
 			line-height: 24px;
-			padding: 10px 40px 10px 18px;
 			border: 1px solid #7a9cd3;
 			outline: 0;
 			width: 100%;
+			overflow: hidden;
+			&.scroll {
+				overflow-y: scroll;
+				width: 99.4%;
+			}
 			&.hidden {
-				display: none !important;
+				display: none;
 			}
 			&.shown {
-				display: block !important;
+				display: block;
 			}
 			.default {
 				background: #c8c8c8;
@@ -73,8 +101,916 @@ h2 {
 				}
 			}
 			option {
-				padding: 2px 15px 2px 5px;
+				padding: 2px 3px 3px 10px;
 			}
 		}
 	}
 }
+@media screen and (max-width: 767px) {
+	.generic-filter {
+		max-height: 100%;
+		.apply-btn {
+			box-sizing: border-box;
+			display: inline-block;
+			width: 100%;
+			padding-right: 20px;
+			.filter-apply-btn {
+				float: right;
+				padding: 0px 15px 25px 0px;
+			}
+		}
+	}
+	.generic-filter-select { 
+		display: block;
+		margin-top: 35px;
+    	margin-bottom: 30px;
+		.filter-select-wrapper {
+			padding: 20px 20px 0 15px;
+		}
+	}
+}
+
+​​.event-list {
+    margin: 30px 0 60px;
+    position: relative
+}
+
+.event-list:before,.event-list:after {
+    content: " ";
+    display: table
+}
+
+.event-list:after {
+    clear: both
+}
+
+.event-list:before,.event-list:after {
+    content: " ";
+    display: table
+}
+
+.event-list:after {
+    clear: both
+}
+
+.event-list .title-wrapper {
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0
+}
+
+.event-list .title-wrapper:before,.event-list .title-wrapper:after {
+    content: " ";
+    display: table
+}
+
+.event-list .title-wrapper:after {
+    clear: both
+}
+
+.event-list .title-wrapper:before,.event-list .title-wrapper:after {
+    content: " ";
+    display: table
+}
+
+.event-list .title-wrapper:after {
+    clear: both
+}
+
+.event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+    font-size: 32px;
+    line-height: 1.1em;
+    letter-spacing: -.5px;
+    margin-bottom: 16px;
+    text-align: center;
+    letter-spacing: inherit
+}
+
+.event-list .title-wrapper h1 .resultCount,.event-list .title-wrapper h2 .resultCount,.event-list .title-wrapper .h1 .resultCount {
+    font-size: 24px
+}
+
+.event-list .subtitle {
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 6px;
+    color: #919296;
+    text-align: center
+}
+
+.event-list .subtitle+.h1 {
+    margin-top: 0
+}
+
+.event-list .image-container {
+    float: left;
+    width: 50%;
+    margin-bottom: 11px;
+    padding-right: 15px
+}
+
+.event-list .list-teaser {
+    padding-top: 25px;
+    padding-bottom: 30px;
+    border-top: 1px solid #f1f0ef
+}
+
+.event-list .list-teaser:before,.event-list .list-teaser:after {
+    content: " ";
+    display: table
+}
+
+.event-list .list-teaser:after {
+    clear: both
+}
+
+.event-list .list-teaser:before,.event-list .list-teaser:after {
+    content: " ";
+    display: table
+}
+
+.event-list .list-teaser:after {
+    clear: both
+}
+
+.event-list .list-teaser.hasImage .event-item-metadata {
+    float: right;
+}
+
+.event-list .event-item-metadata {
+    float: left;
+    font-size: 12px;
+    width: 50%
+}
+
+.event-list .event-item-category,.event-list .event-item-date {
+    display: block
+}
+
+.event-list .event-item-category {
+    /* margin-bottom:-4px; */
+    margin-top: -4px;
+}
+
+.event-list .event-item-category .category-color {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 8px
+}
+
+.event-list .event-item-date {
+    color: #919296;
+    margin-top: 3px;
+    margin-bottom: 2px
+}
+
+.event-list .event-item-content {
+    clear: both;
+    width: 100%!important
+}
+
+.event-list .event-item-title {
+    font-family: "VolvoBroadProDigital";
+    font-size: 25px;
+    line-height: 1.2em;
+    text-align: left;
+    margin: 0 auto 4px!important;
+    letter-spacing: -.5px
+}
+
+.event-list .event-item-title.visdible-xs {
+    margin: 0 auto 4px
+}
+
+.event-list .event-item-title>a {
+    color: #4d4e53
+}
+
+.event-list .event-item-title>a:after {
+    font-family: "fontawesome";
+    padding-left: 15px;
+    content: "\f105";
+    color: #1251b5;
+    vertical-align: middle;
+    position: relative;
+    top: -1px
+}
+
+.event-list .event-item-excerpt {
+    font-size: 16px;
+    margin: 0
+}
+
+.event-list .event-item-download {
+    display: none
+}
+
+.event-list .event-item-download .fa-download::before {
+    padding-right: 8px
+}
+
+.event-list .addtocalendar .fa-plus-circle::before {
+    padding-left: 0;
+    padding-right: 8px
+}
+
+.event-list .perpage,.event-list .filtertopictags,.event-list .filtercategorytags,.event-list .filteryears,.event-list .eventArticlesPath,.event-list .displaydownloadurl,.event-list .eventlistlimit,.event-list .perpagemobile {
+    display: none
+}
+
+.event-list .pagination.bottom {
+    margin-top: 1px;
+    padding: 30px 0 0 0
+}
+
+.event-list .pagination.bottom.first {
+    padding: 30px 0 0 0
+}
+
+.event-list .pagination.bottom.prev {
+    padding: 30px 0 0 0
+}
+
+.event-list .pagination.bottom.next {
+    padding: 30px 0 0 0
+}
+
+.event-list .pagination.bottom.last {
+    padding: 30px 0 0 0
+}
+
+.event-list .pagination .total-results .noresults {
+    font-weight: 700
+}
+
+.event-list .visible-xs {
+    margin-bottom: 0;
+    margin-top: 10px
+}
+
+.event-list .filter-apply-btn .visible-xs {
+    margin-top: 0
+}
+
+.volvo-platform-rtl .eventList .event-item-title>a:after {
+    padding-right: 8px;
+    content: "\f104"
+}
+
+.volvo-platform-rtl .eventList .event-item-category .category-color {
+    float: right;
+    margin-top: 5px;
+    margin-left: 8px;
+    margin-right: 0
+}
+
+.volvo-platform-rtl .eventList .event-item-download .fa-download:before {
+    padding-left: 8px;
+    padding-right: 0
+}
+
+.volvo-platform-rtl .eventList .addtocalendar .fa-plus-circle::before {
+    padding-left: 8px;
+    padding-right: 0
+}
+
+.volvo-platform-rtl .eventList .event-item-metadata {
+    float: left;
+    text-align: right
+}
+
+.volvo-platform-rtl .eventList .image-container {
+    float: right;
+    padding-right: 0;
+    padding-left: 15px
+}
+
+@media (min-width: 768px) and (min-width:768px) {
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        float:left;
+        width: 66.66666667%
+    }
+
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        left: 16.66666667%
+    }
+
+    .event-list .image-container {
+        float: left;
+        width: 25%
+    }
+
+    .event-list .event-item-metadata {
+        float: left;
+        width: 75%
+    }
+
+    .event-list .event-item-content {
+        float: left;
+        width: 75%;
+    }
+}
+
+@media (min-width: 768px) {
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        font-size: 32px;
+        line-height: 1.1em;
+        letter-spacing: -.5px;
+        margin-bottom: 25px;
+        margin-top: -.1em;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px
+    }
+
+    .event-list .title-wrapper h1 .resultCount,.event-list .title-wrapper h2 .resultCount,.event-list .title-wrapper .h1 .resultCount {
+        font-size: 32px
+    }
+
+    .event-list .eventfeed {
+        margin-top: 30px
+    }
+
+    .event-list .subtitle {
+        font-size: 20px;
+        line-height: 1em;
+        color: #919296;
+        font-weight: 400;
+        margin-bottom: 10px
+    }
+
+    .event-list>div {
+        margin-left: -15px;
+        margin-right: -15px
+    }
+
+    .event-list .image-container {
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 16px
+    }
+
+    .event-list .event-item-metadata {
+        font-size: 14px;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px
+    }
+
+    .event-list .event-item-metadata.titleRow {
+        width: 97.5%
+    }
+
+    .event-list .event-item-category {
+        margin-top: 0;
+    }
+
+    .event-list .event-item-content {
+        clear: none;
+        width: 70%!important;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px
+    }
+
+    .event-list .event-item-download {
+        display: block;
+        font-size: 14px;
+        margin: 15px -15px 0
+    }
+
+    .event-list .event-item-download>li {
+        margin-bottom: 12px
+    }
+
+    .event-list .event-item-download>li>a>span {
+        display: inline-block
+    }
+
+    .event-list .event-item-excerpt {
+        font-size: 16px;
+        margin-top: -.3em
+    }
+
+    .event-list .event-item-title {
+        font-size: 25px;
+        line-height: 1.2em;
+        margin-bottom: 11px!important
+    }
+
+    .event-list .pagination.bottom {
+        padding: 30px 0 0 0
+    }
+
+    .event-list .pagination.bottom.first {
+        padding: 0
+    }
+
+    .event-list .pagination.bottom.prev {
+        padding: 0
+    }
+
+    .event-list .pagination.bottom.next {
+        padding: 0
+    }
+
+    .event-list .pagination.bottom.last {
+        padding: 0
+    }
+
+    .event-list .pagination .total-results {
+        top: 28px
+    }
+}
+
+@media (min-width: 992px) {
+    .event-list {
+        margin-top:57px;
+        margin-bottom: 80px
+    }
+
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        font-size: 50px;
+        line-height: 1.1em;
+        letter-spacing: -.5px;
+        margin-bottom: 25px;
+        margin-top: -.1em;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px
+    }
+
+    .event-list .title-wrapper h1 .resultCount,.event-list .title-wrapper h2 .resultCount,.event-list .title-wrapper .h1 .resultCount {
+        font-size: 32px
+    }
+
+    .event-list .event-item-title {
+        font-size: 32px;
+        line-height: 1.1em
+    }
+
+    .event-list .event-item-title>a:after {
+        top: 0
+    }
+}
+
+@media (min-width:768px) {
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        float:left;
+        width: 66.66666667%
+    }
+
+    .event-list .title-wrapper h1,.event-list .title-wrapper h2,.event-list .title-wrapper .h1 {
+        left: 16.66666667%
+    }
+}
+
+
+.pagination {
+    position: relative;
+    font-size: 14px;
+    padding-top: 24px
+}
+
+.pagination.bottom {
+    border-top: 1px solid #f1f0ef;
+    border-bottom: 1px solid #f1f0ef
+}
+
+.pagination .page-count {
+    text-align: center
+}
+
+.pagination .show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.fa-step-backward:before {
+    content: "\f048"
+}
+
+.fa-angle-left:before {
+    content: "\f104";
+}   
+
+.fa-angle-right:before {
+    content: "\f105";
+}
+
+.fa-step-forward:before {
+    content: "\f051";
+}
+
+.pagination .prev,.pagination .next,.pagination .last,.pagination .first {
+    color: #4d4e53;
+    font-size: 30px;
+    cursor: pointer
+}
+
+.pagination .prev.disabled,.pagination .next.disabled,.pagination .last.disabled,.pagination .first.disabled {
+    color: #d8d7d5;
+    cursor: default;
+    outline: none
+}
+
+@media (max-width: 767px) {
+    .pagination .page-count {
+        text-align:center;
+        margin-top: 10px
+    }
+
+    .pagination .prev {
+        position: absolute;
+        left: 50px;
+        padding: 0 15px 0 0
+    }
+
+    .pagination .next {
+        position: absolute;
+        right: 40px;
+        padding: 0 3px 0 15px
+    }
+
+    .pagination .first {
+        position: absolute;
+        left: 0;
+        padding: 0 3px 0 15px
+    }
+
+    .pagination .last {
+        position: absolute;
+        right: 0;
+        padding: 0 3px 0 15px
+    }
+}
+
+.pagination p {
+    position: initial
+}
+
+
+.news-list:before,
+.news-list:after {
+  content: " ";
+  display: table;
+}
+.news-list:after {
+  clear: both;
+}
+.news-list:before,
+.news-list:after {
+  content: " ";
+  display: table;
+}
+.news-list:after {
+  clear: both;
+}
+.news-list .title-wrapper {
+  margin-left: -15px;
+  margin-right: -15px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+.news-list .title-wrapper:before,
+.news-list .title-wrapper:after {
+  content: " ";
+  display: table;
+}
+.news-list .title-wrapper:after {
+  clear: both;
+}
+.news-list .title-wrapper:before,
+.news-list .title-wrapper:after {
+  content: " ";
+  display: table;
+}
+.news-list .title-wrapper:after {
+  clear: both;
+}
+.news-list .title-wrapper h1,
+.news-list .title-wrapper h2,
+.news-list .title-wrapper .h1 {
+  font-family: "VolvoBroadProDigital";
+  font-size: 32px;
+  line-height: 32px;
+  margin-bottom: 21px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: inherit;
+}
+.news-list .title-wrapper h1 .result-count,
+.news-list .title-wrapper h2 .result-count,
+.news-list .title-wrapper .h1 .result-count {
+  font-size: 24px;
+}
+.news-list .subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 14px;
+  margin-bottom: 8px;
+  color: #919296;
+  text-align: center;
+}
+.news-list .subtitle + .h1 {
+  margin-top: 0;
+}
+.news-list .image-container {
+  float: left;
+  width: 50%;
+  margin-bottom: 20px;
+  padding-right: 15px;
+}
+.news-list .list-teaser {
+  padding-top: 30px;
+  padding-bottom: 25px;
+  border-top: 1px solid #f1f0ef;
+}
+.news-list .list-teaser:before,
+.news-list .list-teaser:after {
+  content: " ";
+  display: table;
+}
+.news-list .list-teaser:after {
+  clear: both;
+}
+.news-list .list-teaser:before,
+.news-list .list-teaser:after {
+  content: " ";
+  display: table;
+}
+.news-list .list-teaser:after {
+  clear: both;
+}
+.news-list .list-teaser.has-image .news-item-metadata {
+  float: right;
+}
+.news-list .list-teaser.has-video .news-item-metadata {
+  float: right;
+}
+.news-list .list-teaser.has-video .image-container {
+  position: relative;
+}
+.news-list .news-item-metadata {
+  float: left;
+  font-size: 12px;
+  width: 50%;
+  padding-bottom: 16px;
+}
+.news-list .news-item-category,
+.news-list .news-item-date {
+  display: block;
+}
+.news-list .news-item-category .category-color {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 8px;
+}
+.news-list .news-item-date {
+  color: #919296;
+}
+.news-list .news-item-content {
+  clear: both;
+  width: 100%;
+}
+.news-list .news-item-title {
+  font-family: "VolvoBroadProDigital";
+  font-size: 32px;
+  line-height: 28px;
+  margin: 9.6px 0;
+  letter-spacing: -0.5px;
+}
+.news-list .news-item-title .lastword {
+  display: inline-block;
+  color: #4d4e53;
+  white-space: pre;
+}
+.news-list .news-item-title .lastword:after {
+  font-family: "fontawesome";
+  padding-left: 8px;
+  content: "\f105";
+  color: #1251b5;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.news-list .news-item-title > a {
+  color: #4d4e53;
+}
+.news-list .news-item-excerpt {
+  font-size: 14px;
+  margin: 0;
+}
+.news-list .news-item-download {
+  display: none;
+}
+.news-list .news-item-download .fa-download::before {
+  padding-right: 8px;
+}
+.news-list .perpage,
+.news-list .filtertopictags,
+.news-list .filtercategorytags,
+.news-list .filteryears,
+.news-list .news-articles-path,
+.news-list .displaydownloadurl,
+.news-list .newslistlimit,
+.news-list .perpagemobile {
+  display: none;
+}
+.news-list .pagination {
+  padding-top: 18px;
+  padding-bottom: 3px;
+  margin-bottom: 0;
+}
+.news-list .pagination .first {
+  padding: 0 3px 0 0;
+}
+.news-list.news-magazine .title-wrapper h1,
+.news-list.news-magazine .title-wrapper h2,
+.news-list.news-magazine .title-wrapper .h1,
+.news-list.news-magazine .title-wrapper .news-item-title {
+  font-family: Arial, sans-serif;
+  text-transform: none;
+}
+.news-list.news-magazine .news-item-title {
+  font-family: Arial, sans-serif;
+  text-transform: none;
+}
+.volvo-platform-rtl .news-list .news-item-title > a:after {
+  padding-right: 8px;
+  content: "\f104";
+}
+.volvo-platform-rtl .news-list .news-item-category .category-color {
+  float: right;
+  margin-top: 5px;
+  margin-left: 8px;
+  margin-right: 0;
+}
+.volvo-platform-rtl .news-list .news-item-download .fa-download:before {
+  padding-left: 8px;
+  padding-right: 0;
+}
+.volvo-platform-rtl .news-list .news-item-metadata {
+  float: left;
+  text-align: right;
+}
+.volvo-platform-rtl .news-list .image-container {
+  float: right;
+  padding-right: 0;
+  padding-left: 15px;
+}
+.news-item-list .list-teaser.has-video .image-container a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1em;
+  margin-left: -23px;
+  margin-top: -18px;
+}
+.news-item-list .list-teaser.has-video .image-container a:hover,
+.news-item-list .list-teaser.has-video .image-container a:visited {
+  color: #fff;
+  opacity: .8;
+}
+.news-item-list .list-teaser.has-video .image-container a.dark {
+  color: #4d4e53;
+}
+.news-item-list .list-teaser.has-video .image-container a.dark:hover {
+  color: #030304;
+}
+.main-content.container .news-list.section:first-of-type {
+  margin-top: 20px;
+}
+.main-content.container .generic-listing.section:first-of-type {
+  margin-top: 20px;
+}
+.main-content.container .news-list.section:first-of-type .title-wrapper {
+  padding-top: 5px;
+}
+@media (min-width: 992px) {
+    .news-list .title-wrapper h1,
+    .news-list .title-wrapper h2,
+    .news-list .title-wrapper .h1 {
+      font-size: 48px;
+      line-height: 48px;
+      margin-bottom: 25px;
+      position: relative;
+      min-height: 1px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .news-list .title-wrapper h1 .result-count,
+    .news-list .title-wrapper h2 .result-count,
+    .news-list .title-wrapper .h1 .result-count {
+      font-size: 32px;
+    }
+    .news-list .newsfeed {
+      margin-top: 30px;
+    }
+    .news-list .subtitle {
+      font-size: 20px;
+      line-height: 24px;
+      color: #919296;
+    }
+    .news-list > div {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+    .news-list .list-teaser {
+      padding-top: 25px;
+    }
+    .news-list .list-teaser.has-image .news-item-metadata {
+      float: none;
+    }
+    .news-list .image-container {
+      position: relative;
+      min-height: 1px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .news-list .news-item-metadata {
+      font-size: 14px;
+      position: relative;
+      min-height: 1px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .news-list .news-item-metadata.title-row {
+      float: none;
+      width: 100%;
+    }
+    .news-list .news-item-content {
+      clear: none;
+      position: relative;
+      min-height: 1px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .news-list .news-item-title {
+      margin: 0;
+    }
+    .news-list .news-item-download {
+      display: block;
+      font-size: 14px;
+      margin: 15px -15px 0;
+    }
+    .news-list .news-item-download > li {
+      margin-bottom: 12px;
+    }
+    .news-list .news-item-download > li > a > span {
+      display: inline-block;
+    }
+    .news-list .news-item-excerpt {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 992px) and (min-width: 768px) {
+    .news-list .title-wrapper h1,
+    .news-list .title-wrapper h2,
+    .news-list .title-wrapper .h1 {
+      float: left;
+      width: 66.66666667%;
+    }
+  }
+  @media (min-width: 992px) and (min-width: 768px) {
+    .news-list .title-wrapper h1,
+    .news-list .title-wrapper h2,
+    .news-list .title-wrapper .h1 {
+      left: 16.66666667%;
+    }
+  }
+  @media (min-width: 992px) and (min-width: 768px) {
+    .news-list .image-container {
+      float: left;
+      width: 25%;
+    }
+  }
+  @media (min-width: 992px) and (min-width: 768px) {
+    .news-list .news-item-metadata {
+      float: left;
+      width: 75%;
+    }
+  }
+  @media (min-width: 992px) and (min-width: 768px) {
+    .news-list .news-item-content {
+      float: left;
+      width: 75%;
+    }
+  }
