@@ -57,14 +57,14 @@ class GenericList extends Component {
                 this.fetchListDataOnFilterChange();
                 return (
                     <div>
-                        <EventList id={this.props.id} recordsPerPage={10} reqObj={this.props.requestListObject}/>
+                        <EventList i18Labels={this.props.i18Labels} id={this.props.id} recordsPerPage={10} reqObj={this.props.requestListObject}/>
                     </div>
                 );
             } if(this.props.requestListObject.type === 'NEWS') {
                 this.fetchListDataOnFilterChange();
                 return (
                     <div>
-                        <NewsList id={this.props.id} recordsPerPage={10} reqObj={this.props.requestListObject}/>
+                        <NewsList i18Labels={this.props.i18Labels} id={this.props.id} recordsPerPage={10} reqObj={this.props.requestListObject}/>
                     </div>
                 );
              } else {

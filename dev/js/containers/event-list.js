@@ -95,7 +95,7 @@ class EventList extends Component {
         if(this.props.listResponse[this.props.id] !== undefined) {
             if(this.props.listResponse[this.props.id].length !== 0) {
                 return <div>
-                        <Pagination id={this.props.id} query={this.props.listResponse[this.props.id].query}
+                        <Pagination i18Labels={this.props.i18Labels} id={this.props.id} query={this.props.listResponse[this.props.id].query}
                         recordsPerPage={this.props.recordsPerPage} reqObj={this.props.reqObj} />
                     </div>
             }

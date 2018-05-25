@@ -44,7 +44,7 @@ class GenericFilter extends Component {
                             delete element[item];
                         }
                         //below condition to remove the years if its upcoming event
-                        if( this.props.requestFilterObject.pType === 'EVENTS' && this.props.requestFilterObject.eventType === 'upcoming' && item == 'years') {
+                        if(this.props.requestFilterObject.pType === 'EVENTS' && this.props.requestFilterObject.eventType === 'upcoming' && item == 'years') {
                             delete element[item];
                         }
                     })
@@ -85,23 +85,26 @@ class GenericFilter extends Component {
         } else{
             expanded = true;
         }
-        return (
-            <div className={"generic-filter " + (expanded? 'shown': 'hidden')}  onClick={this.hideAllselect.bind(this)}>
-                <div className="filter-refine-wrapper" onClick={this.toggleFilter.bind(this)}>
-                    <a className="btn-refine" data-toggle="collapse" aria-expanded="true">
-                        <span className="refine">Refine</span>
-                    </a>
-                </div>
-                <SmoothCollapse expanded={expanded}>
-                    {this.renderList()}
-                    <div className="apply-btn">
-                        <div className="filter-apply-btn">
-                            <button className="visible-xs btn btn-primary btn-sm" onClick={this.triggerApplyClick.bind(this)}>Apply</button>
-                        </div>
+        
+        if(Object.keys(this.props.i18Labels).length > 0) {
+            return (
+                <div className={"generic-filter " + (expanded? 'shown': 'hidden')}  onClick={this.hideAllselect.bind(this)}>
+                    <div className="filter-refine-wrapper" onClick={this.toggleFilter.bind(this)}>
+                        <a className="btn-refine" data-toggle="collapse" aria-expanded="true">
+                            <span className="refine">{this.props.i18Labels.refineLabel}</span>
+                        </a>
                     </div>
-                </SmoothCollapse>
-            </div>
-        );
+                    <SmoothCollapse expanded={expanded}>
+                        {this.renderList()}
+                        <div className="apply-btn">
+                            <div className="filter-apply-btn">
+                                <button className="visible-xs btn btn-primary btn-sm" onClick={this.triggerApplyClick.bind(this)}>Apply</button>
+                            </div>
+                        </div>
+                    </SmoothCollapse>
+                </div>
+            );
+        }
     }
 
 }

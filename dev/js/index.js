@@ -19,6 +19,13 @@ const store = createStore(
 window.reactComponents = [
     {   
         "id": "123",
+        "i18Labels": {        
+            "refineLabel": "Refine",
+            "resultsLabel": "Result(s)",
+            "pageLabel": "Page",
+            "ofLabel": "Of",
+            "noResultsLabel": "No Result(s)"
+        },
         "recordsPerPage": 10,
         "filterReqObj" : {
             "url": "http://34.242.112.31:3030/volvo-news-service/news/fetch?&callbackFnName=eventsfilterFunc",
@@ -56,6 +63,13 @@ window.reactComponents = [
     },
     {   
         "id": "456",
+        "i18Labels": {        
+            "refineLabel": "Refine",
+            "resultsLabel": "Result(s)",
+            "pageLabel": "Page",
+            "ofLabel": "Of",
+            "noResultsLabel": "No Result(s)"
+        },
         "recordsPerPage": 10,
         "filterReqObj" : {
             "url": "http://34.242.112.31:3030/volvo-news-service/news/fetch?&callbackFnName=newsfilterFunc6",
@@ -99,7 +113,7 @@ window.reactComponents.forEach(element => {
     if(Object.keys(element).length > 0) {
         ReactDOM.render(
             <Provider store={store}>
-                    <GenericFilterListContainer id={element.id} recordsPerPage={element.recordsPerPage} 
+                    <GenericFilterListContainer id={element.id} i18Labels={element.i18Labels} recordsPerPage={element.recordsPerPage} 
                     filterReqObj={element.filterReqObj} listReqObj={element.listReqObj}/>
             </Provider>,
             document.getElementById(element.id)

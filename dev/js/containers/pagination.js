@@ -67,7 +67,7 @@ class Pagination extends Component {
         let resultsflag = false, disableAllChevrons = false, 
             disableFirstChevron = false, disablePrevChevron = false, disableNextChevron = false, disableLastChevron = false, 
             currentObj = {};
-        if(this.props.query.length > 0 && this.props.currentPage.length > 0 && this.props.id !== null) {
+        if(this.props.query.length > 0 && this.props.currentPage.length > 0 && this.props.id !== null & Object.keys(this.props.i18Labels).length > 0) {
             if(this.props.currentPage.length > 0) {
                 this.props.currentPage.forEach(element => {
                     if(element.id === this.props.id) {
@@ -109,19 +109,23 @@ class Pagination extends Component {
                         <i data-type="LAST" className="fa fa-step-forward"></i>
                     </a>
                     <p className="page-count">
-                    <strong>sida 
-                        <span className="cur-page">{currentObj.page}</span>
-                    </strong> av 
-                    <span className="max-page">{this.getMaxPageCount()}</span>
+                        <strong>
+                            <span>{this.props.i18Labels.pageLabel} </span>
+                            <span className="cur-page">{currentObj.page} </span>
+                        </strong> 
+                        <span>{this.props.i18Labels.ofLabel} </span> 
+                        <span className="max-page">{this.getMaxPageCount()}</span>
                     </p>
                     <p className="total-results">
                         <span className={resultsflag ? 'results hidden-xs show' : 'results hidden-xs hide'}>
                             <span>{this.props.query[0].totalresults}</span>                    
                             <span className="result" >
-                                Resultat
+                                {this.props.i18Labels.resultsLabel}
                             </span>
                         </span>
-                        <span className={!resultsflag ? 'noresults show' : 'noresults hide'}>Inget resultat</span>
+                        <span className={!resultsflag ? 'noresults show' : 'noresults hide'}>
+                            {this.props.i18Labels.noResultsLabel}
+                        </span>
                     </p>
                 </div>
             </div>;

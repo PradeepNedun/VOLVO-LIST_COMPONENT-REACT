@@ -25,9 +25,10 @@ class GenericFilterListContainer extends Component {
         return (
             <div className="container">
             <h2>Filter</h2>
-            <GenericFilter id={this.props.id} requestFilterObject= {this.props.filterReqObj}/>
+            <GenericFilter id={this.props.id} i18Labels={this.props.i18Labels} requestFilterObject= {this.props.filterReqObj}/>
             <h2>List</h2>
-            <GenericList id={this.props.id} recordsPerPage={this.props.recordsPerPage} requestListObject= {this.props.listReqObj}/>
+            <GenericList id={this.props.id} i18Labels={this.props.i18Labels} recordsPerPage={this.props.recordsPerPage} 
+            requestListObject= {this.props.listReqObj}/>
             </div>
         );
     }
