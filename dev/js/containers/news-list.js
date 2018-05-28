@@ -90,13 +90,15 @@ class NewsList extends Component {
         return ;
     }
     getVideo(news) {
+        let finalImagePath = this.getImageSrc(news.niimagepath, news),
+            videoRandomNumber = Math.random().toString().slice(3);
         if(news.mediaType === "Video") {
             return <div>
                 <div className='image-container'>
                     <img title={news.nialttext} alt={news.nialttext} 
-                    src='" + finalImagePath + "' className='img-responsive' />
+                    src={finalImagePath} className='img-responsive' />
                     <a href='#' className='cta-video js-video-modal-trigger' data-toggle='modal' 
-                    data-video-src={news.videourl} data-target='#modal-" + videoRandomNumber + "'>
+                    data-video-src={news.videourl} data-target={'#modal-' + videoRandomNumber}>
                         <i className='fa fa-play-circle'></i>
                     </a>
                 </div>
