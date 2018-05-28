@@ -92,25 +92,25 @@ class NewsList extends Component {
     getVideo(news) {
         if(news.mediaType === "Video") {
             return <div>
-                <div class='image-container'>
+                <div className='image-container'>
                     <img title={news.nialttext} alt={news.nialttext} 
-                    src='" + finalImagePath + "' class='img-responsive' />
-                    <a href='#' class='cta-video js-video-modal-trigger' data-toggle='modal' 
+                    src='" + finalImagePath + "' className='img-responsive' />
+                    <a href='#' className='cta-video js-video-modal-trigger' data-toggle='modal' 
                     data-video-src={news.videourl} data-target='#modal-" + videoRandomNumber + "'>
-                        <i class='fa fa-play-circle'></i>
+                        <i className='fa fa-play-circle'></i>
                     </a>
                 </div>
-                <div class='modal-dialog default'>
-                    <div class='modal-content'>
-                        <button data-dismiss='modal' class='btn-close' type='button'>
-                            <i class='fa fa-close'></i>
-                            <span class='sr-only'>Close</span>
+                <div className='modal-dialog default'>
+                    <div className='modal-content'>
+                        <button data-dismiss='modal' className='btn-close' type='button'>
+                            <i className='fa fa-close'></i>
+                            <span className='sr-only'>Close</span>
                         </button>
-                        <div class='modal-body'>
-                            <div class='poster-image embed-responsive embed-responsive-16by9'>
+                        <div className='modal-body'>
+                            <div className='poster-image embed-responsive embed-responsive-16by9'>
                             </div>
                         </div>
-                        <div class='modal-footer'>
+                        <div className='modal-footer'>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@ class NewsList extends Component {
                             <a href={news.newsArticlesPath + ".html"}>
                                 <img title={news.nialttext} alt={news.nialttext}
                                 src={this.getImageSrc(news.niimagepath, news)} className="img-responsive" 
-                                srcset={this.getImageSrc(news.niimagepath, news)} />
+                                srcSet={this.getImageSrc(news.niimagepath, news)} />
                             </a>
                         </div>
                         {this.getVideo(news)}
