@@ -122,7 +122,7 @@ function mapStateToProps(state) {
 
 // Get actions and pass them as props to to UserList
 //      > now UserList has this.props.selectedDropdown
-function matchDispatchToProps(dispatch){
+function matchDispatchToProps(dispatch) {
     return bindActionCreators({fetchFilterData: (reqObj, id) => itemsFilterFetchData(reqObj, id), 
         toggleRefineBtn: toggleRefineBtn, hideSelect: hideSelect, setSelectedFilter: setSelectedFilter,
         setSelectedOption: setSelectedOption}, dispatch);

@@ -26,7 +26,10 @@ window.reactComponents = [
             "ofLabel": "Of",
             "noResultsLabel": "No Result(s)"
         },
+        "displaydownloadurl": true,
+        "isAuthor": false,
         "recordsPerPage": 10,
+        "browserLocale": "sv-se",
         "filterReqObj" : {
             "url": "http://34.242.112.31:3030/volvo-news-service/news/fetch?&callbackFnName=eventsfilterFunc",
             "pType": "EVENTS",

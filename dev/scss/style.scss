@@ -6,6 +6,22 @@ $primary: #006699;
 h2 {
 	color: $primary;
 }
+.event-list {
+    .image-container {
+        display: none;
+        &.hasImage {
+            display: block;
+        }
+    }
+}
+.news-list {
+    .image-container {
+        display: none;
+        &.hasImage {
+            display: block;
+        }
+    }
+}
 .generic-filter {
 	max-height: 130px;
 	&.shown {

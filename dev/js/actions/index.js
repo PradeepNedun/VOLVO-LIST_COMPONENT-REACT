@@ -10,6 +10,7 @@ export const setSelectedFilter = (count, id, flag) => {
         payload: obj
     }
 };
+
 export const closeSelectedFilter = (count) => {
     return {
         type: 'CLOSE_SELECTED_FILTER',

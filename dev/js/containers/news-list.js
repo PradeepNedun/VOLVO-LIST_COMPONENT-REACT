@@ -33,8 +33,93 @@ class NewsList extends Component {
         }
         return filteredList;
     }
+    getStyle(nicategorycolor) {
+        return {backgroundColor: nicategorycolor};
+    }
+    getLastword(title) {
+        let n = title.split(" ");
+        return n[n.length - 1];
+    } 
+    limitCharacters(text) {
+        let excerptLimit = 190;
+        if (text && text.length > excerptLimit && text.indexOf(" ", excerptLimit) !== -1) {
+            text = text.substring(0, text.indexOf(" ", excerptLimit)) + " ...";
+        }
+        return text || "";
+    }
+    getStartPublishDate(news, browserLocale) {
+        if(this.props.reqObj.isAuthor) {
+           return news.nistartpublishdate;
+        }
+        var formatDate = "";
+        var publish_date = news.startPublishDate.replace(/-/g, "/").split(".");
+        var offset_value = news.timezone;
+        offset_value = offset_value.split(":");
+        var min_one = offset_value[0] * 60;
+        offset_value = min_one + +offset_value[1];
+        var new_publish_date = new Date(publish_date[0]);
+        new_publish_date.setMinutes(new_publish_date.getMinutes() + offset_value);
+        var month = new_publish_date.getMonth() + 1;
+        var new_date = new_publish_date.getFullYear() + "/" + month + "/" + new_publish_date.getDate();
+        var publishDate = new_date,
+            pYear, pMonth, pDay, downloadText = "download";
+        pYear = publishDate.split("/")[0];
+        pMonth = publishDate.split("/")[1];
+        pDay = publishDate.split("/")[2];
+        if (this.props.reqObj.browserLocale) {
+            formatDate = new Date(pYear, pMonth - 1, pDay).toLocaleDateString([this.props.reqObj.browserLocale, "en"]);
+        }
+        return formatDate;
+    }
+    getImageSrc(niimagepath, news) {
+        let extensionSeparator, extension, renditionName = "newslist", lastSlash, imageName, finalImagePath;
+        if (niimagepath !== "") {
+            extensionSeparator = niimagepath.lastIndexOf(".");
+            extension = niimagepath.substring(extensionSeparator + 1);
+            if (niimagepath.indexOf("/") > -1) {
+                lastSlash = niimagepath.lastIndexOf("/");
+                imageName = niimagepath.substring(lastSlash + 1, extensionSeparator);
+            }
+            if (event.newsListRenditionFlag === "Y") {
+                finalImagePath = niimagepath + "/jcr:content/renditions/" + imageName + "-" + renditionName + "." + extension;
+            } else {
+                finalImagePath = niimagepath;
+            }
+            return finalImagePath;
+        }
+        return ;
+    }
+    getVideo(news) {
+        if(news.mediaType === "Video") {
+            return <div>
+                <div class='image-container'>
+                    <img title={news.nialttext} alt={news.nialttext} 
+                    src='" + finalImagePath + "' class='img-responsive' />
+                    <a href='#' class='cta-video js-video-modal-trigger' data-toggle='modal' 
+                    data-video-src={news.videourl} data-target='#modal-" + videoRandomNumber + "'>
+                        <i class='fa fa-play-circle'></i>
+                    </a>
+                </div>
+                <div class='modal-dialog default'>
+                    <div class='modal-content'>
+                        <button data-dismiss='modal' class='btn-close' type='button'>
+                            <i class='fa fa-close'></i>
+                            <span class='sr-only'>Close</span>
+                        </button>
+                        <div class='modal-body'>
+                            <div class='poster-image embed-responsive embed-responsive-16by9'>
+                            </div>
+                        </div>
+                        <div class='modal-footer'>
+                        </div>
+                    </div>
+                </div>
+            </div>;
+        }
+        return ;                      
+    }
     renderList() {
-        let filteredList = [];
+        let filteredList = [], title, hasImage = "";
         if(this.props.listResponse[this.props.id] !== undefined && this.props.listResponse[this.props.id].hasOwnProperty('queryResult')) {
             if(this.props.currentPage.length > 0) {
                 this.props.currentPage.forEach(element => {
@@ -47,38 +132,50 @@ class NewsList extends Component {
                 filteredList = this.props.listResponse[this.props.id].queryResult;
             }
             return filteredList.map((news)=>{
+                if(this.props.reqObj.isAuthor) {
+                    title = news.eaheading;
+                } else {
+                    title = news.title;
+                }
+                if(news.niimagepath != "") {
+                    hasImage = "has-image";
+                }
+                if(news.mediaType == "Video") {
+                    hasImage == "has-video";
+                }
                 return <div>
-                        <div className="list-teaser has-image">
-                            <div className="news-item-metadata title-row">
-                                <span className="news-item-category">
-                                    <span className="category-color"></span>{news.nicategory}
-                                </span>
-                                <span className="news-item-date">{news.newsStartDate}</span>
-                                <h3 className="news-item-title hidden-xs">
-                                    <a href={news.newsArticlesPath + ".html"}>
-                                        {news.title}
-                                    </a>
-                                </h3>
-                            </div>
-                            <div className="image-container">
+                    <div className="list-teaser has-image">
+                        <div className="news-item-metadata title-row">
+                            <span className="news-item-category">
+                                <span style={this.getStyle(news.nicategorycolor)}  className="category-color"></span>
+                                {news.nicategory}
+                            </span>
+                            <span className="news-item-date">{this.getStartPublishDate(news)}</span>
+                            <h3 className="news-item-title hidden-xs">
                                 <a href={news.newsArticlesPath + ".html"}>
-                                    <img title="Alt-Text" alt="Alt-Text" 
-                                    src={news.niimagepath}
-                                    className="img-responsive" 
-                                    srcset={news.niimagepath}
-                                    data-srcset={news.niimagepath} />
+                                    {title.substring(0, title.lastIndexOf(" "))}
+                                    <span className="lastword"> {this.getLastword(title)}</span>
                                 </a>
-                            </div>
-                            <div className="news-item-content">
-                                <h3 className="news-item-title visible-xs">
-                                    <a href={news.newsArticlesPath + ".html"}>
-                                        {news.title}
-                                    </a>
-                                </h3>
-                                <p className="news-item-excerpt">{news.niarticleintro}</p>
-                            </div>
+                            </h3>
+                        </div>
+                        <div className={"image-container " + hasImage}>
+                            <a href={news.newsArticlesPath + ".html"}>
+                                <img title={news.nialttext} alt={news.nialttext}
+                                src={this.getImageSrc(news.niimagepath, news)} className="img-responsive" 
+                                srcset={this.getImageSrc(news.niimagepath, news)} />
+                            </a>
+                        </div>
+                        {this.getVideo(news)}
+                        <div className="news-item-content">
+                            <h3 className="news-item-title visible-xs">
+                                <a href={news.newsArticlesPath + ".html"}>
+                                    {title}
+                                </a>
+                            </h3>
+                            <p className="news-item-excerpt">{this.limitCharacters(news.niarticleintro)}</p>
                         </div>
                     </div>
+                </div>
             });
         }
     }

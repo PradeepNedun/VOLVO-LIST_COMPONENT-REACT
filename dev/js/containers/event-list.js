@@ -33,8 +33,74 @@ class EventList extends Component {
         }
         return filteredList;
     }
+    getEventArticleIntro(eaarticleintro) {
+        let excerptLimit = 190;
+        if (eaarticleintro > excerptLimit) {
+            eaarticleintro = eaarticleintro.substring(0, excerptLimit) + " ...";
+        }
+        return eaarticleintro;
+    }
+    getLastword(title) {
+        let n = title.split(" ");
+        return n[n.length - 1];
+    }
+    getStyle(eacategorycolor) {
+        return {backgroundColor: eacategorycolor};
+    }
+    getdisplaydownloadurl(event) {
+        if (this.props.reqObj.displaydownloadurl === true && event.downloadlinklabels !== "") {
+            return <li className="col-xs-4">
+                <a download className="addtocalendar" href={event.downloadlinks.split(",")} target="_blank">
+                    <i className="fa fa-download"></i>
+                    {event.downloadlinklabels.split(",")}
+                    <span> {event.downloadlinkformat.split(",").toUpperCase()} </span>
+                    {event.downloadlinkssize.split(",")}
+                </a>
+            </li>
+        }
+        return ;
+    }
+    getCalendarMarkup(calendar, event) {
+        let flag = 0;
+        if (calendar !== "") {
+            return <div>
+                <ul className="list-unstyled event-item-download">
+                    <li className="col-xs-4">
+                        <a className="addtocalendar" href={event.calendar} target="_blank" x-cq-linkchecker='skip'>
+                            <i className="fa fa-plus-circle"></i>Add to calendar
+                        </a>
+                    </li>
+                    {this.getdisplaydownloadurl(event)}
+                </ul>
+                <p className="visible-xs">
+                <a className="addtocalendar" href={event.calendar} target="_blank">
+                            <i className="fa fa-plus-circle"></i>Add to calendar
+                        </a>
+                </p>
+            </div>;
+        }
+        return ;
+    }
+    getImageSrc(eaimagepath, event) {
+        let extensionSeparator, extension, renditionName = "newslist", lastSlash, imageName, finalImagePath;
+        if (eaimagepath !== "") {
+            extensionSeparator = eaimagepath.lastIndexOf(".");
+            extension = eaimagepath.substring(extensionSeparator + 1);
+            if (eaimagepath.indexOf("/") > -1) {
+                lastSlash = eaimagepath.lastIndexOf("/");
+                imageName = eaimagepath.substring(lastSlash + 1, extensionSeparator);
+            }
+            if (event.newsListRenditionFlag === "Y") {
+                finalImagePath = eaimagepath + "/jcr:content/renditions/" + imageName + "-" + renditionName + "." + extension;
+            } else {
+                finalImagePath = eaimagepath;
+            }
+            return finalImagePath;
+        }
+        return ;
+    }
     renderList() {
-        let filteredList = [];
+        let filteredList = [], title, hasImage = "";
         if(this.props.listResponse[this.props.id] !== undefined && this.props.listResponse[this.props.id].hasOwnProperty('eventsQueryResult')) {
             if(this.props.currentPage.length > 0) {
                 this.props.currentPage.forEach(element => {
@@ -47,44 +113,43 @@ class EventList extends Component {
                 filteredList = this.props.listResponse[this.props.id].eventsQueryResult;
             }
             return filteredList.map((event)=>{
+                if(this.props.reqObj.isAuthor) {
+                    title = event.eaheading;
+                } else {
+                    title = event.title;
+                }
+                if(event.eaimagepath != "") {
+                    hasImage = "hasImage";
+                }
                 return <div>
-                        <div className="list-teaser hasImage">
+                        <div className={"list-teaser " + hasImage}>
                             <div className="event-item-metadata titleRow">
                                 <span className="event-item-category">
-                                    <span className="category-color"></span>
+                                    <span style={this.getStyle(event.eacategorycolor)} className="category-color"></span>
                                     {event.eacategory}
                                 </span>
-                                <span className="event-item-date">{event.eaeventstartdate}</span>
+                                <span className="event-item-date">{event.eastartdate + " " + event.location + " "+ event.country}</span>
                                 <h3 className="event-item-title hidden-xs">
-                                    <a href="/content/volvo/volvo-penta/sweden/marinecommercial/sv-se/home/events/2017/dec/upcoming-event-new-.html" target="_blank">
-                                        {event.title}
+                                    <a href={event.url} target="_blank">
+                                        {title.substring(0, title.lastIndexOf(" "))}
+                                        <span className="lastword"> {this.getLastword(title)}</span>
                                     </a>
                                 </h3>
                             </div>
-                            <div className="image-container">
+                            <div className={"image-container " + hasImage}>
                                 <a href={event.eventArticlesPath} target="_blank">
-                                    <img title={event.eaalttext} alt={event.eaalttext} src={event.eaimagepath} className="img-responsive"/>
+                                    <img title={event.eaalttext} alt={event.eaalttext} 
+                                    src={this.getImageSrc(event.eaimagepath, event)} className="img-responsive"/>
                                 </a>
                             </div>
                             <div className="event-item-content">
                                 <h3 className="event-item-title visible-xs">
-                                    <a href="/content/volvo/volvo-penta/sweden/marinecommercial/sv-se/home/events/2017/dec/upcoming-event-new-.html" target="_blank">
-                                        {event.title}
+                                    <a href={event.url} target="_blank">
+                                        {title.substring(0, title.lastIndexOf(" "))}
                                     </a>
                                 </h3>
-                                <p className="event-item-excerpt">{event.eaarticleintro}</p>
-                                <ul className="list-unstyled event-item-download">
-                                    <li className="col-xs-4">
-                                        <a className="addtocalendar" href={event.calendar} target="_blank">
-                                            <i className="fa fa-plus-circle"></i>Add to calendar
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p className="visible-xs">
-                                <a className="addtocalendar" href={event.calendar} target="_blank">
-                                            <i className="fa fa-plus-circle"></i>Add to calendar
-                                        </a>
-                                </p>
+                                <p className="event-item-excerpt">{this.getEventArticleIntro(event.eaarticleintro)}</p>
+                                {this.getCalendarMarkup(event.calendar, event)}
                             </div>
                         </div>
                 </div>
