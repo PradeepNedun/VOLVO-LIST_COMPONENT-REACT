@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SmoothCollapse from 'react-smooth-collapse';
-import fontawesome from '@fortawesome/fontawesome';
 import ReactDOM from "react-dom";
 import {setSelectedFilter, setSelectedOption} from '../actions/index';
 
