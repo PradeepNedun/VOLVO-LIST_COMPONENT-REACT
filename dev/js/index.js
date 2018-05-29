@@ -8,7 +8,6 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 import allReducers from './reducers';
 import App from './components/App';
-import fontawesome from '@fortawesome/fontawesome';
 import GenericFilterListContainer from './containers/generic-filter-list-container';
 require('../scss/style.scss');
 const logger = createLogger();
