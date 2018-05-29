@@ -25,6 +25,7 @@ window.reactComponents = [
             "ofLabel": "Of",
             "noResultsLabel": "No Result(s)"
         },
+        "filterExpanded": true,
         "displaydownloadurl": true,
         "isAuthor": false,
         "recordsPerPage": 10,
@@ -72,6 +73,7 @@ window.reactComponents = [
             "ofLabel": "Of",
             "noResultsLabel": "No Result(s)"
         },
+        "filterExpanded": true,
         "recordsPerPage": 10,
         "filterReqObj" : {
             "url": "http://34.242.112.31:3030/volvo-news-service/news/fetch?&callbackFnName=newsfilterFunc6",
@@ -116,7 +118,7 @@ window.reactComponents.forEach(element => {
         ReactDOM.render(
             <Provider store={store}>
                     <GenericFilterListContainer id={element.id} i18Labels={element.i18Labels} recordsPerPage={element.recordsPerPage} 
-                    filterReqObj={element.filterReqObj} listReqObj={element.listReqObj}/>
+                    filterReqObj={element.filterReqObj} listReqObj={element.listReqObj} filterExpanded={element.filterExpanded}/>
             </Provider>,
             document.getElementById(element.id)
         );

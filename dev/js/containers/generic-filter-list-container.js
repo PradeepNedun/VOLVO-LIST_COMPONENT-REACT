@@ -23,11 +23,12 @@ class GenericFilterListContainer extends Component {
         let self = this;
         return (
             <div className="container">
-            <h2>Filter</h2>
-            <GenericFilter id={this.props.id} i18Labels={this.props.i18Labels} requestFilterObject= {this.props.filterReqObj}/>
-            <h2>List</h2>
-            <GenericList id={this.props.id} i18Labels={this.props.i18Labels} recordsPerPage={this.props.recordsPerPage} 
-            requestListObject= {this.props.listReqObj}/>
+                <h2>Filter</h2>
+                <GenericFilter id={this.props.id} i18Labels={this.props.i18Labels} 
+                requestFilterObject= {this.props.filterReqObj} expanded={this.props.filterExpanded}/>
+                <h2>List</h2>
+                <GenericList id={this.props.id} i18Labels={this.props.i18Labels} recordsPerPage={this.props.recordsPerPage} 
+                requestListObject= {this.props.listReqObj}/>
             </div>
         );
     }

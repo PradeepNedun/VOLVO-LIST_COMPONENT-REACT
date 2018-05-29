@@ -13,9 +13,7 @@ const initialState = {
     },
     itemsHasErrored: false,
     itemsIsLoading: false,
-    toggleRefineBtn: {
-        toggleRefineBtn: true
-    },
+    toggleRefineBtn: [],
     HideFilterOnOutsideClick: false
 };
 
@@ -51,10 +49,21 @@ export function itemsFilter(state = initialState.filterResponse, action) {
 export function toggleRefineBtn(state = initialState.toggleRefineBtn, action) {
     switch (action.type) {
         case 'TOGGLE_REFINE_BTN':
-            return Object.assign({}, state, {
-                id: action.payload,
-                toggleRefineBtn: !state.toggleRefineBtn
+            let add = [...state],
+                flag = false;
+            add.map((element) => {
+                if(element.id === action.payload.id) {
+                    element.open = !element.open;
+                    flag = true;
+                }
             });
+            if(!flag) {
+                add.push({
+                    id: action.payload.id,
+                    open: action.payload.open
+                });
+            }
+            return add;
         default:
             return state;
     }

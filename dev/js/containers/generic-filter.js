@@ -20,6 +20,7 @@ class GenericFilter extends Component {
     componentDidMount() {
         if(this.props.id !== undefined) {
             this.props.fetchFilterData(this.props.requestFilterObject, this.props.id);
+            this.props.toggleRefineBtn({id: this.props.id, open: this.props.expanded});
         }
     }
     hideAllselect(e) {
@@ -58,7 +59,7 @@ class GenericFilter extends Component {
         if(this.props.selectedFilter.show) {
             this.props.setSelectedFilter(this.props.selectedFilter.selectedFilter);
         }
-        this.props.toggleRefineBtn(this.props.id);
+        this.props.toggleRefineBtn({id: this.props.id, open: this.props.expanded});
     }
     applyClickHandler(obj, scope) {
         scope.setState({
@@ -71,7 +72,7 @@ class GenericFilter extends Component {
         }
     }
     render() {  
-        let expanded;
+        let currentFilter = {};
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
         }
@@ -79,21 +80,22 @@ class GenericFilter extends Component {
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
-        if((this.props.id === this.props.toggleFilterOnRefineClick.id)) {
-            expanded = this.props.toggleFilterOnRefineClick.toggleRefineBtn;
-        } else{
-            expanded = true;
+        if(this.props.toggleFilterOnRefineClick.length > 0) {
+            this.props.toggleFilterOnRefineClick.forEach((element)=> {
+                if ((this.props.id === element.id)) {
+                    currentFilter = element;
+                }
+            });
         }
-        
         if(Object.keys(this.props.i18Labels).length > 0) {
             return (
-                <div className={"generic-filter " + (expanded? 'shown': 'hidden')}  onClick={this.hideAllselect.bind(this)}>
+                <div className={"generic-filter " + (currentFilter.open ? 'shown': 'hidden')}  onClick={this.hideAllselect.bind(this)}>
                     <div className="filter-refine-wrapper" onClick={this.toggleFilter.bind(this)}>
                         <a className="btn-refine" data-toggle="collapse" aria-expanded="true">
                             <span className="refine">{this.props.i18Labels.refineLabel}</span>
                         </a>
                     </div>
-                    <SmoothCollapse expanded={expanded}>
+                    <SmoothCollapse expanded={currentFilter.open}>
                         {this.renderList()}
                         <div className="apply-btn">
                             <div className="filter-apply-btn">

@@ -25,10 +25,10 @@ export const setSelectedOption = (count) => {
     }
 };
 
-export const toggleRefineBtn = (id) => {
+export const toggleRefineBtn = (obj) => {
     return {
         type: 'TOGGLE_REFINE_BTN',
-        payload: id
+        payload: obj
     }
 };
 
